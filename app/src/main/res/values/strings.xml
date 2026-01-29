@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ArchtiucturalDesign</string>
+    <string name="add_to_favrorite">add to favrorite</string>
+    <string name="get_all_products">Get all Products</string>
+    <string name="get_favorite_products">Get Favorite Products</string>
+    <string name="exit">Exit</string>
+</resources>
