@@ -68,8 +68,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         }
 
         void bind(Product product) {
-            favProductCategory.setText(product.getTitle());
-            favProductName.setText(product.getDescription());
+            favProductCategory.setText(product.getDescription());
+            favProductName.setText(product.getTitle());
             GlideImageLoader.load(itemView.getContext(), product.getThumbnail(), favProductImg);
 
             removeFavBtn.setOnClickListener(new View.OnClickListener() {
