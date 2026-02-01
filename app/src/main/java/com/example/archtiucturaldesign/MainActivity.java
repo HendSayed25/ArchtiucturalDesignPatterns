@@ -7,8 +7,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.archtiucturaldesign.allproducts.controller.AllProductsActivity;
-import com.example.archtiucturaldesign.favproducts.controller.FavActivity;
+import com.example.archtiucturaldesign.presentation.allproducts.view.AllProductsActivity;
+import com.example.archtiucturaldesign.presentation.favproducts.view.FavActivity;
 
 
 public class MainActivity extends AppCompatActivity {

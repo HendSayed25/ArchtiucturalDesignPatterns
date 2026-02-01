@@ -14,10 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ArchtiucturalDesign">
         <activity
-            android:name=".allproducts.controller.AllProductsActivity"
+            android:name=".presentation.allproducts.view.AllProductsActivity"
             android:exported="false" />
         <activity
-            android:name=".favproducts.controller.FavActivity"
+            android:name=".presentation.favproducts.view.FavActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
