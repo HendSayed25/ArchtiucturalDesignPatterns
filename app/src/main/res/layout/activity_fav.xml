@@ -17,10 +17,4 @@
         tools:listitem="@layout/item_favorite">
 
     </androidx.recyclerview.widget.RecyclerView>
-
-    <ImageView
-        android:id="@+id/iv_holder"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
 </androidx.constraintlayout.widget.ConstraintLayout>
