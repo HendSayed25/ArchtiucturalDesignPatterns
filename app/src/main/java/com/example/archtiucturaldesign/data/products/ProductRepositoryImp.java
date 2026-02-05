@@ -2,15 +2,16 @@ package com.example.archtiucturaldesign.data.products;
 
 import android.content.Context;
 
-import androidx.lifecycle.LiveData;
-
 import com.example.archtiucturaldesign.data.products.datasource.local.ProductLocalDataSource;
-import com.example.archtiucturaldesign.data.products.datasource.remote.ProductNetworkResponse;
 import com.example.archtiucturaldesign.data.products.datasource.remote.ProductRemoteDatasource;
+import com.example.archtiucturaldesign.data.products.datasource.remote.ProductResponse;
 import com.example.archtiucturaldesign.data.products.model.Product;
-import com.example.archtiucturaldesign.presentation.allproducts.view.AllProductView;
 
 import java.util.List;
+
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Single;
 
 public class ProductRepositoryImp implements ProductRepository {
 
@@ -23,22 +24,22 @@ public class ProductRepositoryImp implements ProductRepository {
     }
 
     @Override
-    public void getAllProducts(ProductNetworkResponse response) {
-        productRemoteDatasource.getProducts(response);
+    public Single<ProductResponse> getAllProducts() {
+        return productRemoteDatasource.getProducts();
     }
 
     @Override
-    public void addFav(Product product) {
-        productLocalDataSource.addToFav(product);
+    public Completable addFav(Product product) {
+       return productLocalDataSource.addToFav(product);
     }
 
     @Override
-    public void deleteFromFav(Product product) {
-        productLocalDataSource.deleteFromFav(product);
+    public Completable deleteFromFav(Product product) {
+        return productLocalDataSource.deleteFromFav(product);
     }
 
     @Override
-    public LiveData<List<Product>> getFavMovies() {
+    public Flowable<List<Product>> getFavProducts() {
         return productLocalDataSource.getAllFavProducts();
     }
 }

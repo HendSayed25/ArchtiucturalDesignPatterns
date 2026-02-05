@@ -1,16 +1,18 @@
 package com.example.archtiucturaldesign.data.products;
 
 
-import androidx.lifecycle.LiveData;
-
-import com.example.archtiucturaldesign.data.products.datasource.remote.ProductNetworkResponse;
+import com.example.archtiucturaldesign.data.products.datasource.remote.ProductResponse;
 import com.example.archtiucturaldesign.data.products.model.Product;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Single;
+
 public interface ProductRepository {
-     void getAllProducts(ProductNetworkResponse response);
-     void addFav(Product product);
-     void deleteFromFav(Product product);
-     LiveData<List<Product>> getFavMovies();
+     Single<ProductResponse> getAllProducts();
+     Completable addFav(Product product);
+     Completable deleteFromFav(Product product);
+     Flowable<List<Product>> getFavProducts();
 }

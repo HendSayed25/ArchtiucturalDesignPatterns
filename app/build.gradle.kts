@@ -40,6 +40,10 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.glide)
+    implementation(libs.rxjava)
+    implementation(libs.rxandroid)
+    implementation(libs.adapter.rxjava3)
+    implementation(libs.room.rxjava3)
 
     implementation(libs.room.runtime)
     annotationProcessor(libs.room.compiler)

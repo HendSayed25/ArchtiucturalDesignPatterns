@@ -9,26 +9,25 @@ import com.example.archtiucturaldesign.data.products.model.Product;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Flowable;
+
 public class ProductLocalDataSource {
     private ProductDao productDao;
 
-   public ProductLocalDataSource(Context context) {
-       productDao = AppDatabase.getInstance(context).productDao();
-   }
+    public ProductLocalDataSource(Context context) {
+        productDao = AppDatabase.getInstance(context).productDao();
+    }
 
-   public LiveData<List<Product>> getAllFavProducts() {
-       return productDao.getAllProducts();
-   }
+    public Flowable<List<Product>> getAllFavProducts() {
+        return productDao.getAllProducts();
+    }
 
-   public void addToFav(Product product) {
-       new Thread(() -> {
-           productDao.addToFav(product);
-       }).start();
-   }
+    public Completable addToFav(Product product) {
+        return productDao.addToFav(product);
+    }
 
-   public void deleteFromFav(Product product) {
-       new Thread(() -> {
-           productDao.deleteFromFav(product);
-       }).start();
-   }
+    public Completable deleteFromFav(Product product) {
+        return productDao.deleteFromFav(product);
+    }
 }

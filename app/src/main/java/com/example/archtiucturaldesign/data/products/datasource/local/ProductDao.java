@@ -12,15 +12,18 @@ import com.example.archtiucturaldesign.data.products.model.Product;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Flowable;
+
 @Dao
 public interface ProductDao {
 
     @Query("SELECT * FROM "+ Constants.PRODUCT_TABLE_NAME)
-   LiveData<List<Product>>getAllProducts();
+    Flowable<List<Product>> getAllProducts();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void addToFav(Product product);
+    Completable addToFav(Product product);
 
     @Delete
-    void deleteFromFav(Product product);
+    Completable deleteFromFav(Product product);
 }

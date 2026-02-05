@@ -1,14 +1,15 @@
 package com.example.archtiucturaldesign.presentation.allproducts.presenter;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 
-import com.example.archtiucturaldesign.data.products.datasource.remote.ProductNetworkResponse;
 import com.example.archtiucturaldesign.data.products.model.Product;
 import com.example.archtiucturaldesign.data.products.ProductRepository;
 import com.example.archtiucturaldesign.data.products.ProductRepositoryImp;
 import com.example.archtiucturaldesign.presentation.allproducts.view.AllProductView;
 
-import java.util.List;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 
 public class ProductPresenterImp implements ProductPresenter {
@@ -21,31 +22,25 @@ public class ProductPresenterImp implements ProductPresenter {
         views = view;
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public void getAllProducts() {
         views.showLoading();
-        productRepository.getAllProducts(new ProductNetworkResponse() {
-            @Override
-            public void onSuccess(List<Product> products) {
-                views.hideLoading();
-                views.showProducts(products);
-            }
-
-            @Override
-            public void onError(String message) {
-                views.showError(message);
-            }
-
-            @Override
-            public void noInternet() {
-                views.showError("No internet Connection");
-
-            }
-        });
+        productRepository.getAllProducts().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(
+                        productResponse -> {
+                            views.hideLoading();
+                            views.showProducts(productResponse.getProducts());
+                        },
+                        throwable -> {
+                            views.hideLoading();
+                            views.showError(throwable.getMessage());
+                        }
+                );
     }
 
     @Override
     public void addToFav(Product product) {
-        productRepository.addFav(product);
+        productRepository.addFav(product).subscribeOn(Schedulers.io()).subscribe();
     }
 }
